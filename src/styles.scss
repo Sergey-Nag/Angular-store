@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: var(--bs-gray-100);
+}
+
 a {
     text-decoration: none;
 }

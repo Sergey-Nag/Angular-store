@@ -9,6 +9,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { BooksCatalogComponent } from './components/books-catalog/books-catalog.component';
 import { CartComponent } from './components/cart/cart.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ProductInfoComponent } from './components/product-detail/product-info/product-info.component';
+import { ProductCalcComponent } from './components/product-detail/product-calc/product-calc.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HeaderComponent } from './components/header/header.component';
     ProductDetailComponent,
     BooksCatalogComponent,
     CartComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProductInfoComponent,
+    ProductCalcComponent
   ],
   imports: [
     BrowserModule,
