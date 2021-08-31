@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { BooksCatalogComponent } from './components/books-catalog/books-catalog.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
-import { LoginComponent } from './components/login/login.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 const routes: Routes = [
@@ -11,9 +10,9 @@ const routes: Routes = [
     { path: '', pathMatch: 'full', component: BooksCatalogComponent },
     { path: ':id', component: ProductDetailComponent }
   ]},
-  { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
   { path: '', pathMatch: 'full', redirectTo: '/catalog' },
+  { path: 'login', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
 ];
 
 @NgModule({
