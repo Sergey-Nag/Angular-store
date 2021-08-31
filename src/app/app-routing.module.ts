@@ -12,7 +12,7 @@ const routes: Routes = [
   ]},
   { path: 'cart', component: CartComponent },
   { path: '', pathMatch: 'full', redirectTo: '/catalog' },
-  { path: 'login', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  { path: 'login', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
 ];
 
 @NgModule({
