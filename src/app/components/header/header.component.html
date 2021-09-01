@@ -1,0 +1,49 @@
+<header class="mb-5">
+    <div class="bg-dark py-2 text-light">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-5 col-xs-8 col-md-2 text-right pr-0">
+                <span data-testid="username" class="d-inline-block" style="padding-top: .2rem">
+                    username
+                    <img
+                        style="width: 26px"
+                        class="rounded"
+                        alt="avatar"
+                    />
+                </span>
+                </div>
+                <div class="col-5 col-xs-4 col-md-2 d-grid">
+                    <a
+                        class="btn btn-secondary btn-sm"
+                        type="button"
+                        routerLink="/login"
+                    >
+                        Sign Out
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border-bottom bg-light">
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-7 col-md-10">
+            <h2 class="header-title">
+                <a routerLink="/catalog">JS Band Store</a>
+            </h2>
+            </div>
+            <div class="col-5 col-md-2">
+            <div class="d-flex flex-column justify-content-center h-100">
+                <a routerLink="/cart" class="btn btn-outline-secondary position-relative">
+                    <i class="bi bi-cart3"></i>
+                    Cart
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </header>
