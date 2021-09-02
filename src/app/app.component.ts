@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   isAuth = false;
 
   constructor(private authService: AuthService) {
-    this.authService.auth.subscribe((isAuth: boolean) => {
+    this.authService.isAuth.subscribe((isAuth: boolean) => {
       this.isAuth = isAuth;
     });
   }

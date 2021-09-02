@@ -6,7 +6,7 @@
                     <img [src]="avatarUrl" alt="" class="w-100">
                     <hr>
                     <form #form="ngForm" (ngSubmit)="handleSubmit(form)">
-                        <div *ngIf="!isLogined">
+                        <div *ngIf="(loadedData | async) === null">
                             <label for="username" class="form-label">Username</label>
                             <input
                                 type="text"
@@ -16,7 +16,8 @@
                                 ngModel
                                 required
                                 minlength="4"
-                                maxlength="16">
+                                maxlength="16"
+                                [disabled]="isLoading">
                             <div class="d-grid mt-3">
                                 <button
                                     type="submit"
@@ -27,7 +28,7 @@
                                     </button>
                             </div>
                         </div>
-                        <div *ngIf="isLogined" class="text-center">
+                        <div *ngIf="loadedData | async as placeholder" class="text-center">
                             <h3>Welcome {{ placeholder.name }}!</h3>
                             You'll be redirected to the catalog <br>
                             after <b>{{ placeholder.time }}</b> seconds
