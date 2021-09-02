@@ -9,8 +9,7 @@ import { ProductInfoComponent } from './components/product-detail/product-info/p
 import { BooksFilterComponent } from './components/books-catalog/books-filter/books-filter.component';
 import { BooksListComponent } from './components/books-catalog/books-list/books-list.component';
 import { BookCardComponent } from './components/books-catalog/book-card/book-card.component';
-
-
+import { FilterArrayPipe } from 'src/app/shared/pipes/filterArray.pipe';
 
 @NgModule({
   declarations: [
@@ -20,12 +19,13 @@ import { BookCardComponent } from './components/books-catalog/book-card/book-car
     ProductCalcComponent,
     BooksFilterComponent,
     BooksListComponent,
-    BookCardComponent
+    BookCardComponent,
+    FilterArrayPipe,
   ],
   imports: [
     CommonModule,
     CatalogRoutingModule,
     FormsModule,
-  ]
+  ],
 })
 export class CatalogModule { }

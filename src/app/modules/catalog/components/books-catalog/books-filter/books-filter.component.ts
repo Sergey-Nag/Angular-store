@@ -1,5 +1,5 @@
 import { Target } from '@angular/compiler';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-books-filter',
@@ -7,13 +7,20 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./books-filter.component.scss']
 })
 export class BooksFilterComponent {
-  @Output() searchChanged = new EventEmitter<string>();
-  @Output() sortChanged = new EventEmitter<string>();
+  @Input() search: string;
+  @Output() searchChange = new EventEmitter<string>();
+  @Input() price: 0 | 1 | 2 | 3;
+  @Output() priceChange = new EventEmitter<0 | 1 | 2 | 3>();
+
   constructor() { }
 
-  onInputChanged(event: any) {
-    if (event.target.value === '') return;
+  onInputChange(value: string) {
+    this.search = value;
+    this.searchChange.emit(value);
+  }
 
-    this.searchChanged.emit(event.target.value);
+  onSelectChange(value: 0 | 1 | 2 | 3) {
+    this.price = value;
+    this.priceChange.emit(value);
   }
 }

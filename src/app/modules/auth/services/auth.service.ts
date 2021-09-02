@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
 import { BehaviorSubject, Subject } from "rxjs";
 import { tap } from "rxjs/operators";
 import { User } from "../models/user.model";
-import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root',
@@ -31,7 +31,7 @@ export class AuthService {
         if (userData) {
             const user: User = JSON.parse(userData);
             this.user.next(new User(user));
-            this.isAuth.next(true);
+            this.setAuth(true);
         }
     }
 

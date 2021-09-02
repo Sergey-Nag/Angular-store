@@ -8,6 +8,8 @@ import { CatalogService } from '../../services/catalog.service';
 })
 export class BooksCatalogComponent implements OnInit {
   books: Book[] = [];
+  searchText = '';
+  priceValue: 0 | 1 | 2 | 3 = 0;
 
   constructor(private catalogService: CatalogService) { }
 
@@ -18,7 +20,7 @@ export class BooksCatalogComponent implements OnInit {
   }
 
   searchFilter(value: string) {
-    console.log(value)
+    this.searchText = value;
   }
 
 }

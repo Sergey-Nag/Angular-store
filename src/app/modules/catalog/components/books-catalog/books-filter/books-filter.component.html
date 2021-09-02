@@ -6,7 +6,8 @@
                 type="text"
                 class="form-control" 
                 placeholder="Search"
-                (input)="onInputChanged($event)"
+                [ngModel]="search"
+                (ngModelChange)="onInputChange($event)"
                 >
           </div>
     </div>
@@ -15,8 +16,10 @@
             <span class="input-group-text" id="basic-addon1"><i class="bi bi-filter"></i></span>
             <select
                 class="form-select"
-                aria-label="Default select example">
-                <option selected>Price</option>
+                aria-label="Default select example"
+                [ngModel]="price"
+                (ngModelChange)="onSelectChange($event)">
+                <option value="0">Price</option>
                 <option value="1">0 < price < 25
                 </option>
                 <option value="2">25 < price < 50

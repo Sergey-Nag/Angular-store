@@ -1,2 +1,7 @@
-<app-books-filter (searchChanged)="searchFilter($event)"></app-books-filter>
-<app-books-list [books]="books"></app-books-list>
+<app-books-filter
+    [(search)]="searchText"
+    [(price)]="priceValue"
+></app-books-filter>
+<app-books-list
+    [books]="books | filterArray: searchText"
+></app-books-list>
