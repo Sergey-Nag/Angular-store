@@ -10,6 +10,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductInfoComponent } from './components/product-detail/product-info/product-info.component';
 import { ProductCalcComponent } from './components/product-detail/product-calc/product-calc.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductCalcComponent } from './components/product-detail/product-calc/p
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
