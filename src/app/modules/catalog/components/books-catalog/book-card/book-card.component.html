@@ -1,4 +1,4 @@
-<div class="card border-light">
+<div class="card border-light" [attr.data-testid]="'book-' + book.id">
     <img [src]="book.cover" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{ book.title }}</h5>

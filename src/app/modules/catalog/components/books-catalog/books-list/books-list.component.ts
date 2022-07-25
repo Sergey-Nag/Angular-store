@@ -6,7 +6,7 @@ import { Book } from 'src/app/shared/book.model';
   templateUrl: './books-list.component.html',
 })
 export class BooksListComponent {
-  @Input() books!: Book[];
+  @Input() books: Book[];
   constructor() { }
 
 }
