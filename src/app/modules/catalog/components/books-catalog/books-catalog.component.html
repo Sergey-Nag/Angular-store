@@ -3,5 +3,5 @@
     [(price)]="priceValue"
 ></app-books-filter>
 <app-books-list
-    [books]="books | filterArray: searchText"
+    [books]="books | filterArray: searchText : priceValue"
 ></app-books-list>

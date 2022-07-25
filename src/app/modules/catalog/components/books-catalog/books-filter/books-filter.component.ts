@@ -1,5 +1,6 @@
 import { Target } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PriceFilterValues } from 'src/app/shared/enums/PriceFilterValues.enum';
 
 @Component({
   selector: 'app-books-filter',
@@ -9,18 +10,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class BooksFilterComponent {
   @Input() search: string;
   @Output() searchChange = new EventEmitter<string>();
-  @Input() price: 0 | 1 | 2 | 3;
-  @Output() priceChange = new EventEmitter<0 | 1 | 2 | 3>();
+  @Input() price: PriceFilterValues;
+  @Output() priceChange = new EventEmitter<PriceFilterValues>();
 
   constructor() { }
 
   onInputChange(value: string) {
     this.search = value;
-    this.searchChange.emit(value);
+    this.searchChange.emit(this.search);
   }
 
-  onSelectChange(value: 0 | 1 | 2 | 3) {
-    this.price = value;
-    this.priceChange.emit(value);
+  onSelectChange(value: '0' | '1' | '2' | '3') {
+    this.price = +value;
+    this.priceChange.emit(this.price);
   }
 }

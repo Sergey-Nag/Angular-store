@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/shared/book.model';
+import { PriceFilterValues } from 'src/app/shared/enums/PriceFilterValues.enum';
 import { CatalogService } from '../../services/catalog.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CatalogService } from '../../services/catalog.service';
 export class BooksCatalogComponent implements OnInit {
   books: Book[] = [];
   searchText = '';
-  priceValue: 0 | 1 | 2 | 3 = 0;
+  priceValue: PriceFilterValues = PriceFilterValues.All;
 
   constructor(private catalogService: CatalogService) { }
 
@@ -18,9 +19,4 @@ export class BooksCatalogComponent implements OnInit {
       this.books = books;
     });
   }
-
-  searchFilter(value: string) {
-    this.searchText = value;
-  }
-
 }
