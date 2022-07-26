@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Book } from 'src/app/shared/book.model';
+import { Book } from '@shared/models/book.model';
 
 @Component({
   selector: 'app-book-card',
@@ -9,7 +9,4 @@ import { Book } from 'src/app/shared/book.model';
 })
 export class BookCardComponent {
   @Input() book!: Book;
-  
-  constructor() { }
-
 }

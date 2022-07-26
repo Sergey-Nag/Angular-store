@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { BooksCatalogComponent } from './components/books-catalog/books-catalog.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
@@ -9,7 +8,8 @@ import { ProductInfoComponent } from './components/product-detail/product-info/p
 import { BooksFilterComponent } from './components/books-catalog/books-filter/books-filter.component';
 import { BooksListComponent } from './components/books-catalog/books-list/books-list.component';
 import { BookCardComponent } from './components/books-catalog/book-card/book-card.component';
-import { FilterArrayPipe } from 'src/app/shared/pipes/filterArray.pipe';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,12 +20,13 @@ import { FilterArrayPipe } from 'src/app/shared/pipes/filterArray.pipe';
     BooksFilterComponent,
     BooksListComponent,
     BookCardComponent,
-    FilterArrayPipe,
   ],
   imports: [
-    CommonModule,
     CatalogRoutingModule,
     FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class CatalogModule { }

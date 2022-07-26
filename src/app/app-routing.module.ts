@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CartComponent } from './components/cart/cart.component';
-import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { AuthGuard } from '@core/guards/auth.guard';
+import { CartComponent } from '@shared/components/cart/cart.component';
 
 const routes: Routes = [
   { path: 'catalog', canActivate: [AuthGuard], loadChildren: () => import('./modules/catalog/catalog.module').then(m => m.CatalogModule) },

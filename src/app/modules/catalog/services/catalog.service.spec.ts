@@ -1,49 +1,32 @@
-import { HttpClient } from "@angular/common/http";
-import { of } from "rxjs";
-import { Book } from "src/app/shared/book.model";
-import { CatalogService } from "./catalog.service";
+import { getTestBed, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { CatalogService } from './catalog.service';
+import { first } from "rxjs/operators";
+import { API_ENDPOINTS } from "@shared/constants/Api.constant";
 
 describe('Catalog service', () => {
-  let httpClientSpy: jasmine.SpyObj<HttpClient>;
-  let catalogService: CatalogService;
+  let injector: TestBed;
+  let httpMock: HttpTestingController 
   
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-    catalogService = new CatalogService(httpClientSpy);
-  });
-
-  it('getBooks method should call a GET request', () => {
-    catalogService.getBooks();
-
-    expect(httpClientSpy.get.calls.count())
-      .withContext('one call')
-      .toBe(1);
-  });
-
-  it('getBooks method should return the observeble with the books array', (done: DoneFn) => {
-    const expectedBooksArray: Book[] = [{
-      id: 'test',
-      count: 1,
-      price: 10,
-      title: 'test',
-      author: 'test',
-      level: 'test',
-      description: 'test',
-      cover: 'test',
-      tags: ['test'],
-    }];
-
-    httpClientSpy.get.and.returnValue(of(expectedBooksArray));
-
-    catalogService.getBooks().subscribe({
-      next: (books) => {
-        expect(books)
-          .withContext('expected books')
-          .toEqual(expectedBooksArray);
-
-        done();
-      },
-      error: done.fail
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
     });
+
+    injector = getTestBed();
+    httpMock = injector.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it(`getBooks method should make GET request to the ${API_ENDPOINTS.Books}`, () => {
+    const catalogService = TestBed.inject(CatalogService);
+
+    catalogService.getBooks().pipe(first()).subscribe();
+
+    const req = httpMock.expectOne(API_ENDPOINTS.Books);
+    expect(req.request.method).toBe('GET');
   });
 });

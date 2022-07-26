@@ -1,5 +1,7 @@
-import { Target } from '@angular/compiler';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { PriceFilterRules } from 'src/app/shared/constants/PriceFIlterRules';
 import { PriceFilterValues } from 'src/app/shared/enums/PriceFilterValues.enum';
 
 @Component({
@@ -7,21 +9,26 @@ import { PriceFilterValues } from 'src/app/shared/enums/PriceFilterValues.enum';
   templateUrl: './books-filter.component.html',
   styleUrls: ['./books-filter.component.scss']
 })
-export class BooksFilterComponent {
-  @Input() search: string;
-  @Output() searchChange = new EventEmitter<string>();
-  @Input() price: PriceFilterValues;
-  @Output() priceChange = new EventEmitter<PriceFilterValues>();
+export class BooksFilterComponent implements OnInit, OnDestroy {
+  @Output() filterChange = new EventEmitter<any>();
+  private formSub: Subscription;
+  filterForm: FormGroup;
+  priceFilterRules = PriceFilterRules.map(({ name }) => name);
 
-  constructor() { }
-
-  onInputChange(value: string) {
-    this.search = value;
-    this.searchChange.emit(this.search);
+  constructor() {
+    this.filterForm = new FormGroup({
+      searchTerm: new FormControl(),
+      priceTerm: new FormControl(PriceFilterValues.All)
+    });
   }
 
-  onSelectChange(value: '0' | '1' | '2' | '3') {
-    this.price = +value;
-    this.priceChange.emit(this.price);
+  ngOnInit(): void {
+    this.formSub = this.filterForm.valueChanges.subscribe((values) => {
+      this.filterChange.emit(values);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.formSub.unsubscribe();
   }
 }

@@ -1,15 +1,15 @@
-<div class="card border-light" [attr.data-testid]="'book-' + book.id">
-    <img [src]="book.cover" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{ book.title }}</h5>
-      <p class="card-text">{{ book.author }}</p>
-      <div class="row">
-          <div class="col-6">
-              <span class="price">${{ book.price }}</span>
-          </div>
-          <div class="col-6 d-grid">
-            <a [routerLink]="book.id" class="btn btn-outline-primary">View</a>
-          </div>
-      </div>
+<div class="card border-light">
+  <img [src]="book.cover" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ book.title }}</h5>
+    <p class="card-text">{{ book.author }}</p>
+    <div class="row">
+        <div class="col-6">
+            <span class="price">${{ book.price }}</span>
+        </div>
+        <div class="col-6 d-grid">
+          <a [routerLink]="book.id" class="btn btn-outline-primary">View</a>
+        </div>
     </div>
   </div>
+</div>

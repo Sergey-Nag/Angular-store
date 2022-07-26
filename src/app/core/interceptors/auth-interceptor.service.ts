@@ -1,8 +1,9 @@
-import { HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { HttpErrorResponse, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { exhaustMap, take } from "rxjs/operators";
-import { User } from "../models/user.model";
-import { AuthService } from "../services/auth.service";
+import { User } from "@shared/models/user.model";
+import { of } from "rxjs";
+import { catchError, exhaustMap, take } from "rxjs/operators";
+import { AuthService } from "../../modules/auth/services/auth.service";
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
@@ -10,7 +11,6 @@ export class AuthInterceptorService implements HttpInterceptor {
     
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         return this.authService.user.pipe(
-            take(1),
             exhaustMap((user: User | null) => {
                 if (!user) return next.handle(req);
 
@@ -19,6 +19,11 @@ export class AuthInterceptorService implements HttpInterceptor {
                 });
                 
                 return next.handle(modifiedReq);
+            }),
+            catchError((err) => {
+                if (err.status === 401) this.authService.signOut();
+
+                return of(err);
             })
         );
     }

@@ -1,32 +1,28 @@
-<div class="row">
-    <div class="col-3">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-            <input
-                type="text"
-                class="form-control" 
-                placeholder="Search"
-                [ngModel]="search"
-                (ngModelChange)="onInputChange($event)"
-                >
-          </div>
-    </div>
-    <div class="col-3">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1"><i class="bi bi-filter"></i></span>
-            <select
-                class="form-select"
-                aria-label="Default select example"
-                [ngModel]="price"
-                (ngModelChange)="onSelectChange($event)">
-                    <option value="0">Price</option>
-                    <option value="1">0 < price < 25
-                    </option>
-                    <option value="2">25 < price < 50
-                    </option>
-                    <option value="3">price > 50
-                    </option>
-            </select>
+<form [formGroup]="filterForm">
+    <div class="row">
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                <input
+                    type="text"
+                    class="form-control" 
+                    placeholder="Search"
+                    formControlName="searchTerm">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-filter"></i></span>
+                <select
+                    class="form-select"
+                    formControlName="priceTerm">
+                        <option 
+                            *ngFor="let ruleName of priceFilterRules; index as i" 
+                            [ngValue]="i">
+                            {{ruleName}}
+                        </option>
+                </select>
+            </div>
         </div>
     </div>
-</div>
+</form>

@@ -1,13 +1,19 @@
-import { render } from '@testing-library/angular';
-import { screen } from '@testing-library/dom';
-import { Book } from 'src/app/shared/book.model';
-import { BookCardComponent } from './book-card.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { APP_BASE_HREF, Location } from "@angular/common";
+import { ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
+import { Book } from "@shared/models/book.model";
+import { BookCardComponent } from "./book-card.component";
+import { render, screen } from '@testing-library/angular'
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { AppRoutingModule } from "src/app/app-routing.module";
+import { CatalogModule } from "../../../catalog.module";
 
 describe('Book card', () => {
   let book: Book;
+  let component: BookCardComponent;
+  let fixtureComponent: ComponentFixture<BookCardComponent>;
+  let location: Location;
 
-  beforeAll(() => {
+  beforeEach(async () => {
     book = new Book(
       '1',
       6, 
@@ -19,34 +25,32 @@ describe('Book card', () => {
       'https://jsbooks.revolunet.com/img/cover-apuntes-javascript-intermedio.png',
       ['core']
     );
-  });
 
-  it('Should render book card', async () => {
-    await render(BookCardComponent, {
+    const { fixture } = await render(BookCardComponent, {
       componentProperties: { book },
-    });
-  
-    const card = screen.getByTestId('book-1');
-
-    expect(card).toBeTruthy();
-  });
-
-  it('Should have image, title, author, price and the link', async () => {
-    await render(BookCardComponent, {
-      componentProperties: { book },
-      imports: [AppRoutingModule]
+      imports: [AppRoutingModule, CatalogModule, HttpClientTestingModule],
+      providers:[
+        {
+          provide: APP_BASE_HREF,
+          useValue: '/catalog'
+        }
+      ]
     });
 
-    const image = screen.getByRole<HTMLImageElement>('img');
-    const title = screen.getByRole('heading', { name: book.title });
-    const link = screen.getByRole('link', { name: 'View' });
-    const price = screen.getByText(`$${book.price}`);
-    const author = screen.getByText(book.author);
-
-    expect(image.src).toBe(book.cover);
-    expect(title).toBeTruthy();
-    expect(author).toBeTruthy();
-    expect(price).toBeTruthy();
-    expect(link).toBeTruthy();
+    fixtureComponent = fixture;
+    component = fixture.componentInstance;
+    location = TestBed.inject(Location);
   });
+
+  it('Should show the book content', () => {
+    expect(fixtureComponent).toMatchSnapshot();
+  });
+
+  it('Should go to the details page by clicking on the view link', fakeAsync(() => {
+    screen.getByRole<HTMLLinkElement>('link', { name: 'View' }).click();
+
+    tick();
+    
+    expect(location.path()).toBe(`/${book.id}`);
+  }));
 });

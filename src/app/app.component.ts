@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { AuthService } from './modules/auth/services/auth.service';
 
 @Component({
@@ -7,13 +8,9 @@ import { AuthService } from './modules/auth/services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  isAuth = false;
+  isAuth$ = this.authService.user.pipe(map(user => !!user));
 
-  constructor(private authService: AuthService) {
-    this.authService.isAuth.subscribe((isAuth: boolean) => {
-      this.isAuth = isAuth;
-    });
-  }
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.authService.autoSignIn();

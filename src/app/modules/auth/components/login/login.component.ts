@@ -1,9 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject, interval, Subscription } from 'rxjs';
-import { finalize, take, tap } from 'rxjs/operators';
-import { User } from '../../models/user.model';
+import { take } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -23,9 +21,7 @@ export class LoginComponent {
 
     this.authService
       .signIn(form.value.username)
-      .pipe(take(1))
       .subscribe(() => {
-        this.authService.setAuth(true);
         this.isLoading = false;
         this.router.navigate(['/']);
       });

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from 'src/app/shared/book.model';
+import { Book } from 'src/app/shared/models/book.model';
 import { PriceFilterValues } from 'src/app/shared/enums/PriceFilterValues.enum';
 import { CatalogService } from '../../services/catalog.service';
 
@@ -9,10 +9,15 @@ import { CatalogService } from '../../services/catalog.service';
 })
 export class BooksCatalogComponent implements OnInit {
   books: Book[] = [];
-  searchText = '';
-  priceValue: PriceFilterValues = PriceFilterValues.All;
+  searchTerm = '';
+  priceTerm: PriceFilterValues = PriceFilterValues.All;
 
   constructor(private catalogService: CatalogService) { }
+
+  formChangeHandler({searchTerm, priceTerm}: { searchTerm: string, priceTerm: PriceFilterValues}) {
+    this.searchTerm = searchTerm;
+    this.priceTerm = priceTerm;
+  }
 
   ngOnInit(): void {
     this.catalogService.getBooks().subscribe((books: Book[]) => {
