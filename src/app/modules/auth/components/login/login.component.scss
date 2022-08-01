@@ -1,3 +1,12 @@
 .container {
     height: 100vh;
 }
+
+.form-control.ng-touched {
+    &.ng-invalid {
+        border-color: var(--bs-danger);
+    }
+    &.ng-valid {
+        border-color: var(--bs-success);
+    }
+}

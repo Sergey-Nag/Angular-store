@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BooksCatalogComponent } from './components/books-catalog/books-catalog.component';
-import { CartComponent } from './components/cart/cart.component';
-import { CatalogComponent } from './components/catalog/catalog.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { AuthGuard } from '@core/guards/auth.guard';
+import { CartComponent } from '@shared/components/cart/cart.component';
 
 const routes: Routes = [
-  { path: 'catalog', component: CatalogComponent, children: [
-    { path: '', pathMatch: 'full', component: BooksCatalogComponent },
-    { path: ':id', component: ProductDetailComponent }
-  ]},
-  { path: 'cart', component: CartComponent },
+  { path: 'catalog', canActivate: [AuthGuard], loadChildren: () => import('./modules/catalog/catalog.module').then(m => m.CatalogModule) },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: '', pathMatch: 'full', redirectTo: '/catalog' },
   { path: 'login', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
 ];

@@ -1,0 +1,6 @@
+<app-books-filter
+    (filterChange)="formChangeHandler($event)"
+></app-books-filter>
+<app-books-list
+    [books]="books | nameFilter: searchTerm | priceFilter: priceTerm"
+></app-books-list>

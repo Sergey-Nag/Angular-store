@@ -3,23 +3,27 @@
         <div class="container">
             <div class="row justify-content-end">
                 <div class="col-5 col-xs-8 col-md-2 text-right pr-0">
-                <span data-testid="username" class="d-inline-block" style="padding-top: .2rem">
-                    username
+                <span
+                    class="d-inline-block"
+                    style="padding-top: .2rem"
+                    *ngIf="userdata | async as user">
+                    {{user.username}}
                     <img
                         style="width: 26px"
                         class="rounded"
                         alt="avatar"
+                        [src]="user.avatar"
                     />
                 </span>
                 </div>
                 <div class="col-5 col-xs-4 col-md-2 d-grid">
-                    <a
+                    <button
                         class="btn btn-secondary btn-sm"
                         type="button"
-                        routerLink="/login"
+                        (click)="onSignOut()"
                     >
                         Sign Out
-                    </a>
+                </button>
                 </div>
             </div>
         </div>
