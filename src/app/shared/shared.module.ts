@@ -5,13 +5,15 @@ import { CartComponent } from './components/cart/cart.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NameFilterPipe } from './pipes/nameFilter.pipe';
 import { PriceFilterPipe } from './pipes/priceFilter.pipe';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     CartComponent,
     HeaderComponent,
     NameFilterPipe,
-    PriceFilterPipe
+    PriceFilterPipe,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { PriceFilterPipe } from './pipes/priceFilter.pipe';
     PriceFilterPipe,
     HeaderComponent,
     RouterModule,
+    SpinnerComponent,
   ]
 })
 export class SharedModule { }

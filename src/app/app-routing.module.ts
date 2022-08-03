@@ -5,9 +5,10 @@ import { CartComponent } from '@shared/components/cart/cart.component';
 
 const routes: Routes = [
   { path: 'catalog', canActivate: [AuthGuard], loadChildren: () => import('./modules/catalog/catalog.module').then(m => m.CatalogModule) },
+  { path: 'catalog/:id', loadChildren: () => import('./modules/product-detail/product-detail.module').then(m => m.ProductDetailModule) },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-  { path: '', pathMatch: 'full', redirectTo: '/catalog' },
   { path: 'login', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
+  { path: '', pathMatch: 'full', redirectTo: '/catalog' },
 ];
 
 @NgModule({

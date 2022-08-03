@@ -1,0 +1,10 @@
+<div class="row" *ngIf="book">
+    <div class="col-md-8">
+        <app-product-info [book]="book"></app-product-info>
+    </div>
+    <div class="col-md-4 mb-5">
+        <app-product-calc [price]="book.price"></app-product-calc>
+        <button class="btn btn-primary float-end mt-4" disabled>Add to cart</button>
+    </div>
+</div>
+<app-spinner *ngIf="isLoading | async"></app-spinner>

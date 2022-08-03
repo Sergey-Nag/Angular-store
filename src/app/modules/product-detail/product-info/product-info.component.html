@@ -1,0 +1,26 @@
+<div class="card p-4">
+    <div class="row">
+        <div class="col-6">
+            <img [src]="book.cover" class="d-block mx-auto" [alt]="book.title">
+        </div>
+        <div class="col-6">
+            <span class="badge bg-info mb-3">{{book.level}}</span>
+            <h2>{{book.title}}</h2>
+            <span class="text-secondary">{{book.author}}</span>
+            <p class="tags mt-3">
+                <span 
+                    class="badge bg-secondary"
+                    *ngFor="let tag of book.tags">
+                    {{tag}}
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-6">
+            <p>
+                {{book.description}}
+            </p>
+        </div>
+    </div>
+</div>
