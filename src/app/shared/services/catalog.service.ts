@@ -12,4 +12,8 @@ export class CatalogService {
     getBooks() {
         return this.http.get<Book[]>(API_ENDPOINTS.Books);
     }
+
+    getBook(id: string) {
+        return this.http.get<Book>(`${API_ENDPOINTS.Books}/${id}`);
+    }
 }

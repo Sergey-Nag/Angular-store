@@ -2,5 +2,7 @@
     (filterChange)="formChangeHandler($event)"
 ></app-books-filter>
 <app-books-list
+    *ngIf="books"
     [books]="books | nameFilter: searchTerm | priceFilter: priceTerm"
 ></app-books-list>
+<app-spinner *ngIf="isLoading$ | async"></app-spinner>

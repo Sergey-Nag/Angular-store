@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent  {
-  userdata = this.authService.user;
+  userData$ = this.authService.user$;
 
   constructor(private authService: AuthService) { }
 

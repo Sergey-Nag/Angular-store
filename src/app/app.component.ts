@@ -8,7 +8,7 @@ import { AuthService } from './modules/auth/services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  isAuth$ = this.authService.user.pipe(map(user => !!user));
+  isAuth$ = this.authService.user$.pipe(map(user => !!user));
 
   constructor(private authService: AuthService) {}
 

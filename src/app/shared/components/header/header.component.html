@@ -6,7 +6,7 @@
                 <span
                     class="d-inline-block"
                     style="padding-top: .2rem"
-                    *ngIf="userdata | async as user">
+                    *ngIf="userData$ | async as user">
                     {{user.username}}
                     <img
                         style="width: 26px"

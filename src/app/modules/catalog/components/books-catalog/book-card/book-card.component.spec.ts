@@ -48,7 +48,8 @@ describe('Book card', () => {
 
   it('Should go to the details page by clicking on the view link', fakeAsync(() => {
     screen.getByRole<HTMLLinkElement>('link', { name: 'View' }).click();
-
+    console.log(window.location.href);
+    
     tick();
     
     expect(location.path()).toBe(`/${book.id}`);

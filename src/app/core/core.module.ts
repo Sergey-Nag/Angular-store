@@ -2,7 +2,8 @@ import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+import { AuthInterceptorService } from './interceptors/auth.interceptor';
+import { HttpRequestStateInterceptor } from './interceptors/http-request-state.interceptor';
 
 @NgModule({
   imports: [
@@ -13,13 +14,21 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
     HttpClientModule,
     BrowserModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorService,
-    multi: true,
-  }, {
-    provide: APP_BASE_HREF,
-    useValue: '/'
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestStateInterceptor,
+      multi: true,
+    },
+    {
+      provide: APP_BASE_HREF,
+      useValue: '/'
+    }
+  ],
 })
 export class CoreModule { }
