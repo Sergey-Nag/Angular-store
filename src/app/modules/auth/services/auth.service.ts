@@ -11,7 +11,7 @@ import { User } from "@shared/models/user.model";
     providedIn: 'root',
 })
 export class AuthService {
-    user = new BehaviorSubject<User>(null);
+    user$ = new BehaviorSubject<User>(null);
 
     constructor(private http: HttpClient, private router: Router) {}
 
@@ -26,18 +26,18 @@ export class AuthService {
     autoSignIn() {
         const user = getLocalAuthState();
         if (user) {
-            this.user.next(user);
+            this.user$.next(user);
         }
     }
 
     signOut() {
         removeLocalAuthState();
-        this.user.next(null);
+        this.user$.next(null);
         this.router.navigate(['/login']);
     }
 
     private handleAuth(data: User) {
         setlocalAuthState(data);
-        this.user.next(new User(data));
+        this.user$.next(new User(data));
     }
 }

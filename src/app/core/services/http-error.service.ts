@@ -6,13 +6,13 @@ import { Subject } from "rxjs";
   providedIn: 'root'
 })
 export class HttpErrorService {
-  error = new Subject<HttpErrorResponse>();
+  error$ = new Subject<HttpErrorResponse>();
 
   showError(error: HttpErrorResponse) {
-    this.error.next(error);
+    this.error$.next(error);
   }
 
   hideError() {
-    this.error.next(null);
+    this.error$.next(null);
   }
 }

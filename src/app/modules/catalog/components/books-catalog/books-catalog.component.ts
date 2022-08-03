@@ -12,7 +12,7 @@ export class BooksCatalogComponent implements OnInit {
   books: Book[];
   searchTerm = '';
   priceTerm: PriceFilterValues = PriceFilterValues.All;
-  isLoading = this.loading.isLoading;
+  isLoading$ = this.loading.isLoading$;
 
   constructor(private catalogService: CatalogService, private loading: HttpLoadingService) { }
 

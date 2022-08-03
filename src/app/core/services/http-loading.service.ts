@@ -5,13 +5,13 @@ import { BehaviorSubject } from "rxjs";
   providedIn: 'root'
 })
 export class HttpLoadingService {
-  isLoading = new BehaviorSubject(false);
+  isLoading$ = new BehaviorSubject(false);
 
   requestStarted() {
-    this.isLoading.next(true);
+    this.isLoading$.next(true);
   }
 
   requestFinished() {
-    this.isLoading.next(false);
+    this.isLoading$.next(false);
   }
 }

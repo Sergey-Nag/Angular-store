@@ -11,14 +11,7 @@ import { Book } from '@shared/models/book.model';
 export class ProductInfoComponent implements OnInit {
   @Input() book: Book;
 
-  constructor() {
-    console.log(this.book);
-    
-  }
-
   ngOnInit(): void {
     console.log(this.book);
-    
   }
-
 }

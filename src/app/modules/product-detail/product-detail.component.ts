@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpLoadingService } from '@core/services/http-loading.service';
 import { Book } from '@shared/models/book.model';
-import { Observable, Subscription } from 'rxjs';
-import { catchError, finalize, switchMap, tap } from 'rxjs/operators';
 import { CatalogService } from '../../shared/services/catalog.service';
 
 @Component({
@@ -12,11 +10,9 @@ import { CatalogService } from '../../shared/services/catalog.service';
   styleUrls: ['./product-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductDetailComponent implements OnInit, OnDestroy {
-  private paramsSub: Subscription;
-  book: Book;
-  
-  isLoading = this.loading.isLoading;
+export class ProductDetailComponent implements OnInit {
+  isLoading$ = this.loading.isLoading$;
+  book: Book;  
 
   constructor(
     private route: ActivatedRoute, 
@@ -26,20 +22,13 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.paramsSub = this.route.paramMap
-      .pipe(
-        switchMap((params) => params.get('id')),
-        switchMap((id) => this.catalog.getBook(id)),
-      )
+    const bookId = this.route.snapshot.paramMap.get('id');
+
+    this.catalog.getBook(bookId)
       .subscribe((book: Book) => {
         this.book = book;
 
         this.cdRef.detectChanges();
       });
   }
-
-  ngOnDestroy(): void {
-    this.paramsSub.unsubscribe();
-  }
-
 }
