@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpLoadingService } from '@core/services/http-loading.service';
 import { Book } from '@shared/models/book.model';
@@ -32,9 +32,5 @@ export class ProductDetailComponent implements OnInit {
 
         this.cdRef.detectChanges();
       });
-  }
-
-  countChange() {
-    console.log(this.count);
   }
 }
