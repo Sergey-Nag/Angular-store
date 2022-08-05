@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpLoadingService } from '@core/services/http-loading.service';
+import { ApiCallHelper } from '@shared/helpers/api-call.helper';
 import { Book } from '@shared/models/book.model';
 import { CatalogService } from '../../shared/services/catalog.service';
 
@@ -11,22 +11,23 @@ import { CatalogService } from '../../shared/services/catalog.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailComponent implements OnInit {
-  isLoading$ = this.loading.isLoading$;
+  isLoading = false;
   book: Book;  
 
   constructor(
     private route: ActivatedRoute, 
     private catalog: CatalogService,
     private cdRef: ChangeDetectorRef,
-    private loading: HttpLoadingService
   ) {}
 
   ngOnInit(): void {
     const bookId = this.route.snapshot.paramMap.get('id');
-
-    this.catalog.getBook(bookId)
-      .subscribe((book: Book) => {
-        this.book = book;
+    
+    ApiCallHelper
+      .executeRequest(this.catalog.getBook(bookId))
+      .subscribe(({ loading, payload }) => {
+        this.isLoading = loading;
+        this.book = payload;
 
         this.cdRef.detectChanges();
       });
