@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpLoadingService } from '@core/services/http-loading.service';
 import { Book } from '@shared/models/book.model';
@@ -13,6 +13,7 @@ import { CatalogService } from '../../shared/services/catalog.service';
 export class ProductDetailComponent implements OnInit {
   isLoading$ = this.loading.isLoading$;
   book: Book;  
+  count = 0;
 
   constructor(
     private route: ActivatedRoute, 
@@ -27,8 +28,13 @@ export class ProductDetailComponent implements OnInit {
     this.catalog.getBook(bookId)
       .subscribe((book: Book) => {
         this.book = book;
+        this.count = 1;
 
         this.cdRef.detectChanges();
       });
+  }
+
+  countChange() {
+    console.log(this.count);
   }
 }
