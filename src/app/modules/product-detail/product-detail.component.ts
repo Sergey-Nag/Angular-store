@@ -11,7 +11,7 @@ import { CatalogService } from '../../shared/services/catalog.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailComponent implements OnInit {
-  isLoading = true;
+  isLoading = false;
   book: Book;  
 
   constructor(
