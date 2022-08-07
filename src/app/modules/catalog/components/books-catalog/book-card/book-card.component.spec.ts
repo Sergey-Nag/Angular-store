@@ -5,13 +5,16 @@ import { BookCardComponent } from "./book-card.component";
 import { render, screen } from '@testing-library/angular'
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { AppRoutingModule } from "src/app/app-routing.module";
+import { RouterTestingModule } from '@angular/router/testing';
 import { CatalogModule } from "../../../catalog.module";
+import { Router } from "@angular/router";
+import { ProductDetailComponent } from "src/app/modules/product-detail/product-detail.component";
 
 describe('Book card', () => {
   let book: Book;
   let component: BookCardComponent;
   let fixtureComponent: ComponentFixture<BookCardComponent>;
-  let location: Location;
+  let router: Router;
 
   beforeEach(async () => {
     book = new Book(
@@ -28,18 +31,22 @@ describe('Book card', () => {
 
     const { fixture } = await render(BookCardComponent, {
       componentProperties: { book },
-      imports: [AppRoutingModule, CatalogModule, HttpClientTestingModule],
-      providers:[
-        {
-          provide: APP_BASE_HREF,
-          useValue: '/catalog'
-        }
-      ]
+      imports: [RouterTestingModule.withRoutes(
+        [{
+          path: '',
+          children: [
+            {
+              path: ':id',
+              component: ProductDetailComponent,
+            }
+          ]
+        }]
+      ), CatalogModule, HttpClientTestingModule],
     });
 
     fixtureComponent = fixture;
     component = fixture.componentInstance;
-    location = TestBed.inject(Location);
+    router = TestBed.inject(Router);
   });
 
   it('Should show the book content', () => {
@@ -48,10 +55,9 @@ describe('Book card', () => {
 
   it('Should go to the details page by clicking on the view link', fakeAsync(() => {
     screen.getByRole<HTMLLinkElement>('link', { name: 'View' }).click();
-    console.log(window.location.href);
     
     tick();
     
-    expect(location.path()).toBe(`/${book.id}`);
+    expect(router.routerState.snapshot.url).toBe('/1')
   }));
 });

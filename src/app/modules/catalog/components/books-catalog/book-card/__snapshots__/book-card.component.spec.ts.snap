@@ -42,7 +42,7 @@ exports[`Book card Should show the book content 1`] = `
         >
           <a
             class="btn btn-outline-primary"
-            href="/catalog/1"
+            href="/1"
           >
             View
           </a>
