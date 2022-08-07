@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/shared/models/book.model';
 import { PriceFilterValues } from 'src/app/shared/enums/PriceFilterValues.enum';
 import { CatalogService } from '../../../../shared/services/catalog.service';
-import { HttpLoadingService } from '@core/services/http-loading.service';
+import { ApiCallHelper } from '@shared/helpers/api-call.helper';
 
 @Component({
   selector: 'app-books-catalog',
@@ -12,9 +12,9 @@ export class BooksCatalogComponent implements OnInit {
   books: Book[];
   searchTerm = '';
   priceTerm: PriceFilterValues = PriceFilterValues.All;
-  isLoading$ = this.loading.isLoading$;
+  isLoading = false;
 
-  constructor(private catalogService: CatalogService, private loading: HttpLoadingService) { }
+  constructor(private catalogService: CatalogService) { }
 
   formChangeHandler({searchTerm, priceTerm}: { searchTerm: string, priceTerm: PriceFilterValues}) {
     this.searchTerm = searchTerm;
@@ -22,8 +22,11 @@ export class BooksCatalogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.catalogService.getBooks().subscribe((books: Book[]) => {
-      this.books = books;
-    });
+    ApiCallHelper
+      .executeRequest(this.catalogService.getBooks())
+      .subscribe(({ loading, payload }) => {
+        this.isLoading = loading;
+        this.books = payload;
+      });
   }
 }

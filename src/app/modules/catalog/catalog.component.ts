@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpLoadingService } from '@core/services/http-loading.service';
 
 @Component({
   selector: 'app-catalog',
