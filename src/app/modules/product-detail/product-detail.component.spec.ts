@@ -32,19 +32,19 @@ describe('Product details', () => {
 
     rendered = await render(ProductDetailComponent, {
       imports: [ProductDetailModule, HttpClientTestingModule, AppRoutingModule],
-      // componentProviders: [ActivatedRoute],
+      componentProviders: [ActivatedRoute],
         //  CatalogService, ChangeDetectorRef],
       providers:[
         {
           provide: APP_BASE_HREF,
           useValue: '/'
         },
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            paramMap: of(new Map().set('id', '1'))
-          }
-        },
+        // {
+        //   provide: ActivatedRoute,
+        //   useValue: {
+        //     paramMap: of(new Map().set('id', book.id))
+        //   }
+        // },
         {
           provide: CatalogService,
           useValue: {
@@ -54,7 +54,7 @@ describe('Product details', () => {
       ]
     });
 
-    rendered.navigate('/catalog/1');
+    rendered.navigate(`/catalog/${book.id}`);
   });
   
 

@@ -11,8 +11,8 @@
                 class="form-control form-control-sm"
                 min="0"
                 [max]="available"
-                [(ngModel)]="count"
-                (change)="onCountChange($event)">
+                [value]="count"
+                (change)="handleCountChange($event)">
         </div>
     </div>
     <div class="row">

@@ -28,9 +28,12 @@ export class ProductDetailComponent implements OnInit {
     this.catalog.getBook(bookId)
       .subscribe((book: Book) => {
         this.book = book;
-        this.count = 1;
 
         this.cdRef.detectChanges();
       });
+  }
+
+  handleCountChange(count: number) {
+    this.count = count;
   }
 }

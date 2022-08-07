@@ -9,14 +9,19 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 export class ProductCalcComponent {
   @Input() price: number;
   @Input() available: number;
-  @Input() count: number;
-  @Output() countChange = new EventEmitter<number>();
+  @Output() onCountChange = new EventEmitter<number>();
+  
+  count = 1;
 
   get totalPrice() {
     return (this.price * this.count).toFixed(2);
   }
 
-  onCountChange(e: Event) {
-    this.countChange.emit(this.count);
+  handleCountChange(e: Event) {
+    const value = +(e.target as HTMLInputElement).value;
+
+    this.count = Math.min(Math.max(value, 0), this.available);
+
+    this.onCountChange.emit(this.count);
   }
 }

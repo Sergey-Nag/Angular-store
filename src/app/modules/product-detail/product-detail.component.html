@@ -6,7 +6,7 @@
         <app-product-calc
             [price]="book.price"
             [available]="book.count"
-            [(count)]="count">
+            (onCountChange)="handleCountChange($event)">
         </app-product-calc>
         <button
             class="btn btn-primary float-end mt-4"
