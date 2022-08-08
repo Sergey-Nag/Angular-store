@@ -3,7 +3,7 @@
 exports[`Product details Should show book's content instead the spinner after data is loaded: with content 1`] = `
 <app-product-detail
   __ngContext__={[Function LRootView]}
-  book={[Function Book]}
+  book={[Function Object]}
   catalog={[Function Object]}
   cdRef={[Function ViewRef]}
   count="0"
