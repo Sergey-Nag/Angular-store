@@ -12,6 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 import { SharedModule } from "@shared/shared.module";
 import { delay } from "rxjs/operators";
 import { ProductCalcComponent } from "./product-calc/product-calc.component";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('Product details', () => {
   let book: Book;
