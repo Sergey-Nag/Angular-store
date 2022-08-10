@@ -3,10 +3,11 @@
 exports[`Product details Should show book's content instead the spinner after data is loaded: with content 1`] = `
 <app-product-detail
   __ngContext__={[Function LRootView]}
-  book={[Function Book]}
+  book={[Function Object]}
   catalog={[Function Object]}
   cdRef={[Function ViewRef]}
-  paramsSub={[Function Subscriber]}
+  count="0"
+  isLoading="false"
   route={[Function Object]}
 >
   <div
@@ -27,7 +28,7 @@ exports[`Product details Should show book's content instead the spinner after da
             >
               <img
                 alt="Apuntes de Javascript I - Nivel Intermedio"
-                class="d-block mx-auto"
+                class="d-block mx-auto img-fluid"
                 src="https://jsbooks.revolunet.com/img/cover-apuntes-javascript-intermedio.png"
               />
             </div>
@@ -106,6 +107,8 @@ exports[`Product details Should show book's content instead the spinner after da
             >
               <input
                 class="form-control form-control-sm"
+                max="6"
+                min="0"
                 type="number"
               />
             </div>
@@ -132,7 +135,7 @@ exports[`Product details Should show book's content instead the spinner after da
         class="btn btn-primary float-end mt-4"
         disabled=""
       >
-        Add to cart
+         Add to cart 
       </button>
     </div>
   </div>
@@ -142,138 +145,26 @@ exports[`Product details Should show book's content instead the spinner after da
 exports[`Product details Should show the spinner instead content until data is loaded: with spinner 1`] = `
 <app-product-detail
   __ngContext__={[Function LRootView]}
-  book={[Function Book]}
+  book="null"
   catalog={[Function Object]}
   cdRef={[Function ViewRef]}
-  paramsSub={[Function Subscriber]}
+  count="0"
+  isLoading={[Function Boolean]}
   route={[Function Object]}
 >
-  <div
-    class="row"
-  >
+  <app-spinner>
     <div
-      class="col-md-8"
+      class="text-center pt-5"
     >
-      <app-product-info>
-        <div
-          class="card p-4"
-        >
-          <div
-            class="row"
-          >
-            <div
-              class="col-6"
-            >
-              <img
-                alt="Apuntes de Javascript I - Nivel Intermedio"
-                class="d-block mx-auto"
-                src="https://jsbooks.revolunet.com/img/cover-apuntes-javascript-intermedio.png"
-              />
-            </div>
-            <div
-              class="col-6"
-            >
-              <span
-                class="badge bg-info mb-3"
-              >
-                Intermediate
-              </span>
-              <h2>
-                Apuntes de Javascript I - Nivel Intermedio
-              </h2>
-              <span
-                class="text-secondary"
-              >
-                JuanMa Garrido
-              </span>
-              <p
-                class="tags mt-3"
-              >
-                <span
-                  class="badge bg-secondary"
-                >
-                   core 
-                </span>
-              </p>
-            </div>
-          </div>
-          <div
-            class="row mt-3"
-          >
-            <div
-              class="col-6"
-            >
-              <p>
-                 En Castellano) Revision de conceptos (actuales) de javascript desde basicos hasta un nivel intermedio 
-              </p>
-            </div>
-          </div>
-        </div>
-      </app-product-info>
-    </div>
-    <div
-      class="col-md-4 mb-5"
-    >
-      <app-product-calc>
-        <div
-          class="card product-calc p-4"
-        >
-          <div
-            class="row"
-          >
-            <div
-              class="col"
-            >
-              Price, $
-            </div>
-            <div
-              class="col-4 text-end"
-            >
-              56.95
-            </div>
-          </div>
-          <div
-            class="row align-items-center"
-          >
-            <div
-              class="col"
-            >
-              Count
-            </div>
-            <div
-              class="col-4"
-            >
-              <input
-                class="form-control form-control-sm"
-                type="number"
-              />
-            </div>
-          </div>
-          <div
-            class="row"
-          >
-            <div
-              class="col"
-            >
-              <b>
-                Total price, $
-              </b>
-            </div>
-            <div
-              class="col-4 text-end"
-            >
-              56.95
-            </div>
-          </div>
-        </div>
-      </app-product-calc>
-      <button
-        class="btn btn-primary float-end mt-4"
-        disabled=""
+      <div
+        class="spinner-border text-secondary"
+        role="status"
       >
-        Add to cart
-      </button>
+        <span
+          class="sr-only"
+        />
+      </div>
     </div>
-  </div>
+  </app-spinner>
 </app-product-detail>
 `;

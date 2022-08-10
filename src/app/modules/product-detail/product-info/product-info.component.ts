@@ -8,10 +8,6 @@ import { Book } from '@shared/models/book.model';
   styleUrls: ['./product-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductInfoComponent implements OnInit {
+export class ProductInfoComponent {
   @Input() book: Book;
-
-  ngOnInit(): void {
-    console.log(this.book);
-  }
 }

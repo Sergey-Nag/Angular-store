@@ -1,54 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Book card Should show the book content 1`] = `
-<app-book-card
+<wrapper-component
   __ngContext__={[Function LRootView]}
 >
-  <div
-    class="card border-light"
-  >
-    <img
-      alt="..."
-      class="card-img-top"
-      src="https://jsbooks.revolunet.com/img/cover-apuntes-javascript-intermedio.png"
-    />
-    <div
-      class="card-body"
-    >
-      <h5
-        class="card-title"
-      >
-        Apuntes de Javascript I - Nivel Intermedio
-      </h5>
-      <p
-        class="card-text"
-      >
-        JuanMa Garrido
-      </p>
+  <router-outlet /><app-catalog>
+    <app-book-card>
       <div
-        class="row"
+        class="card border-light"
       >
+        <img
+          alt="..."
+          class="card-img-top"
+          src="https://jsbooks.revolunet.com/img/cover-apuntes-javascript-intermedio.png"
+        />
         <div
-          class="col-6"
+          class="card-body"
         >
-          <span
-            class="price"
+          <h5
+            class="card-title"
           >
-            $56.95
-          </span>
-        </div>
-        <div
-          class="col-6 d-grid"
-        >
-          <a
-            class="btn btn-outline-primary"
-            href="/catalog/1"
+            Apuntes de Javascript I - Nivel Intermedio
+          </h5>
+          <p
+            class="card-text"
           >
-            View
-          </a>
+            JuanMa Garrido
+          </p>
+          <div
+            class="row"
+          >
+            <div
+              class="col-6"
+            >
+              <span
+                class="price"
+              >
+                $56.95
+              </span>
+            </div>
+            <div
+              class="col-6 d-grid"
+            >
+              <a
+                class="btn btn-outline-primary"
+                href="/catalog/1"
+              >
+                View
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</app-book-card>
+    </app-book-card>
+  </app-catalog>
+</wrapper-component>
 `;

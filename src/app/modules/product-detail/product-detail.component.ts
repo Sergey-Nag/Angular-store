@@ -13,6 +13,7 @@ import { CatalogService } from '../../shared/services/catalog.service';
 export class ProductDetailComponent implements OnInit {
   isLoading = false;
   book: Book;  
+  count = 0;
 
   constructor(
     private route: ActivatedRoute, 
@@ -31,5 +32,9 @@ export class ProductDetailComponent implements OnInit {
 
         this.cdRef.detectChanges();
       });
+  }
+
+  handleCountChange(count: number) {
+    this.count = count;
   }
 }

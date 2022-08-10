@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product-calc',
@@ -8,12 +8,20 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 })
 export class ProductCalcComponent {
   @Input() price: number;
-  @Input() count: number;
+  @Input() available: number;
+  @Output() onCountChange = new EventEmitter<number>();
+  
+  count = 1;
 
   get totalPrice() {
-    return this.price
+    return (this.price * this.count).toFixed(2);
   }
 
-  constructor() { }
+  handleCountChange(e: Event) {
+    const value = +(e.target as HTMLInputElement).value;
 
+    this.count = Math.min(Math.max(value, 0), this.available);
+
+    this.onCountChange.emit(this.count);
+  }
 }
