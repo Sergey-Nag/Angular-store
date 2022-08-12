@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login form Should render login form component 1`] = `
+<app-login
+  __ngContext__={[Function LRootView]}
+  authForm={[Function FormGroup]}
+  authService={[Function Object]}
+  isLoading="false"
+  router={[Function Object]}
+>
+  <div
+    class="container"
+  >
+    <div
+      class="row h-100 justify-content-center align-items-center"
+    >
+      <div
+        class="col-sm-6 col-xl-4"
+      >
+        <div
+          class="card"
+        >
+          <div
+            class="card-body"
+          >
+            <img
+              alt="avatar"
+              class="w-100"
+              src="../../../assets/unknown-guy.svg"
+            />
+            <hr />
+            <form
+              class="ng-untouched ng-pristine ng-invalid"
+              novalidate=""
+            >
+              <label
+                class="form-label"
+                for="username"
+              >
+                Username
+              </label>
+              <input
+                class="form-control ng-untouched ng-pristine ng-invalid"
+                formcontrolname="username"
+                id="username"
+                name="username"
+                type="text"
+              />
+              <div
+                class="invalid-feedback"
+              >
+                <p
+                  class="m-0"
+                >
+                   Field is required 
+                </p>
+              </div>
+              <div
+                class="d-grid mt-3"
+              >
+                <button
+                  class="btn btn-primary"
+                  disabled=""
+                  type="submit"
+                >
+                   Log in 
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-login>
+`;

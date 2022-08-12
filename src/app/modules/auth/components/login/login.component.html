@@ -5,23 +5,26 @@
                 <div class="card-body">
                     <img src="../../../assets/unknown-guy.svg" alt="avatar" class="w-100">
                     <hr>
-                    <form #form="ngForm" (ngSubmit)="handleSubmit(form)">
+                    <form [formGroup]="authForm" (ngSubmit)="handleSubmit()">
                         <label for="username" class="form-label">Username</label>
                         <input
                             type="text"
                             id="username"
                             class="form-control"
                             name="username"
-                            ngModel
-                            required
-                            minlength="4"
-                            maxlength="16"
-                            [disabled]="isLoading">
+                            formControlName="username"
+                            [class.is-invalid]="isControlInvalid('username')"
+                            [class.is-valid]="authForm.dirty && !isControlInvalid('username')">
+                        <div class="invalid-feedback">
+                            <p *ngFor="let error of getControlErrorMessage('username')" class="m-0">
+                                {{error}}
+                            </p>
+                        </div>
                         <div class="d-grid mt-3">
                             <button
                                 type="submit"
                                 class="btn btn-primary"
-                                [disabled]="form.invalid || isLoading">
+                                [disabled]="authForm.invalid || isLoading">
                                     <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     Log in
                                 </button>

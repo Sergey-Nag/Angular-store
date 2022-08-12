@@ -1,7 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { VALIDATION_ERROR } from '@shared/helpers/validation-error.helper';
+import { debounceTime } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,19 +12,48 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   isLoading = false;
+  authForm = new FormGroup({
+    username: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.email,
+      Validators.maxLength(40),
+    ])
+  }, { updateOn: 'blur'});
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  handleSubmit(form: NgForm) {
-    if (form.invalid) return;
+  isControlInvalid(controlName: string): boolean {
+    return this.authForm.controls[controlName].touched && this.authForm.controls[controlName].invalid;
+  }
+
+  getControlErrorMessage(controlName: string): string[] {
+    return Object.keys(
+        this.authForm.controls[controlName].errors || []
+      )
+      .map((errorKey) => VALIDATION_ERROR[errorKey]);
+  }
+
+  handleSubmit() {
+    if (this.authForm.invalid) return;
     
-    this.isLoading = true;
+    this.startLoading();
 
     this.authService
-      .signIn(form.value.username)
+      .signIn(this.authForm.value.username)
       .subscribe(() => {
-        this.isLoading = false;
+        this.finishLoading();
         this.router.navigate(['/']);
       });
+  }
+
+  private startLoading() {
+    this.isLoading = true;
+    this.authForm.get('username').disable();
+  }
+
+  private finishLoading() {
+    this.isLoading = false;
+    this.authForm.get('username').enable();
   }
 }
