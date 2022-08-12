@@ -82,47 +82,46 @@ describe('Login form', () => {
   });
   
   describe('Should be invalid and show "Email" error message with the different invalid emails', () => {
-    let rendered: RenderResult<LoginComponent, LoginComponent>;
-    let input: HTMLInputElement;
-    let componentInstance: LoginComponent;
-
-    beforeEach( async () => {
-      rendered = await renderWithServices();
-      input = rendered.getByRole('textbox') as HTMLInputElement;
-      componentInstance = rendered.fixture.componentInstance;
-    });
-
     it('The "12345" value should be invalid', async () => {
+      const { fixture } = await renderWithServices();
+      const input = screen.getByRole('textbox');
+
       fireEvent.input(input, { target: { value: '12345' }});
       fireEvent.blur(input);
   
       const errorMessage = await waitFor(() => screen.getByText(VALIDATION_ERROR.email));
   
-      expect(componentInstance.authForm.invalid).toBe(true);
+      expect(fixture.componentInstance.authForm.invalid).toBe(true);
   
       expect(errorMessage).toBeVisible();
       expect(screen.getByRole('button', { name: 'Log in'})).toBeDisabled();
     });
   
     it('The "abc@" value should be invalid', async () => {
+      const { fixture } = await renderWithServices();
+      const input = screen.getByRole('textbox');
+
       fireEvent.input(input, { target: { value: 'abc@' }});
       fireEvent.blur(input);
   
       const errorMessage = await waitFor(() => screen.getByText(VALIDATION_ERROR.email));
   
-      expect(componentInstance.authForm.invalid).toBe(true);
+      expect(fixture.componentInstance.authForm.invalid).toBe(true);
   
       expect(errorMessage).toBeVisible();
       expect(screen.getByRole('button', { name: 'Log in'})).toBeDisabled();
     });
 
     it('The "@abc.de" value should be invalid', async () => {
+      const { fixture } = await renderWithServices();
+      const input = screen.getByRole('textbox');
+
       fireEvent.input(input, { target: { value: '@abc.de' }});
       fireEvent.blur(input);
   
       const errorMessage = await waitFor(() => screen.getByText(VALIDATION_ERROR.email));
   
-      expect(componentInstance.authForm.invalid).toBe(true);
+      expect(fixture.componentInstance.authForm.invalid).toBe(true);
   
       expect(errorMessage).toBeVisible();
       expect(screen.getByRole('button', { name: 'Log in'})).toBeDisabled();
