@@ -1,7 +1,7 @@
 import { ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { VALIDATION_ERROR } from "@shared/helpers/validation-error.helper";
-import { fireEvent, getByText, render, screen, RenderResult } from "@testing-library/angular";
+import { fireEvent, render, screen } from "@testing-library/angular";
 import { waitFor } from "@testing-library/dom";
 import { of } from "rxjs";
 import { AuthService } from "../../services/auth.service";
